@@ -39,6 +39,7 @@ const Login = () => {
               type="email"
               id="email"
               value={email}
+              placeholder="Please enter your e-mail"
               onChange={(e) => setEmail(e.target.value)}
               className="w-full p-3 rounded-md bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-blue-500"
               required
@@ -55,6 +56,7 @@ const Login = () => {
               type="password"
               id="password"
               value={password}
+              placeholder="Please enter your password"
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-3 rounded-md bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-blue-500"
               required

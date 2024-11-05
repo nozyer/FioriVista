@@ -19,6 +19,8 @@ export const AuthProvider = ({ children }) => {
     const userDoc = await getDoc(doc(db, "users", userUid));
     if (userDoc.exists()) {
       const profileData = userDoc.data();
+      console.log(profileData);
+
       setUserProfile(profileData);
       localStorage.setItem("userProfile", JSON.stringify(profileData));
     } else {
@@ -48,7 +50,11 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (email, password) => {
     try {
-      const result = await createUserWithEmailAndPassword(auth, email, password);
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const newUserProfile = {
         username: result.user.email?.split("@")[0] || "",
         userRole: "user",
@@ -88,7 +94,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, userProfile, register, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, userProfile, register, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
