@@ -1,6 +1,9 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Logo from "../assets/image.png";
+import EmailIcon from '@mui/icons-material/Email';
+import LockIcon from '@mui/icons-material/Lock';
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -25,64 +28,70 @@ const Register = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-900 text-gray-100">
-      <div className="flex items-center justify-center w-1/2 bg-white rounded-l-xl shadow-lg"></div>
-      <div className="flex flex-col items-center justify-center w-1/2 px-8 py-12 bg-gray-800 rounded-r-xl">
-        <div className="w-3/4 max-w-md">
-          <h2 className="text-3xl font-bold mb-8 text-center">Sign Up</h2>
-          <form onSubmit={handleRegister}>
-            <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-3 rounded-md bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium mb-2"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 rounded-md bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
-            {error && <p className="text-red-600 text-center mb-4">{error}</p>}
+    <div className="flex h-screen relative">
+      <div className="mb-12 absolute">
+        <button onClick={() => navigate("/")}>                
+          <img
+            src={Logo}
+            alt="Logo"
+            className="w-60 h-32"
+          />
+        </button>
+      </div>
+      <div className="flex flex-col w-full justify-center items-center px-8 py-12 bg-white rounded-r-xl">
+        <h2 className="text-3xl font-semibold mb-8 text-black">Register</h2>
+        <form onSubmit={handleRegister} className="w-3/4 max-w-md flex flex-col">
+          <div className="mb-2 relative">
+            <EmailIcon className="absolute top-3 left-3 text-black " />
+            <input
+              type="email"
+              id="email"
+              value={email}
+              placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-2 pl-10 rounded-full border-2 border-gray-500  text-black  focus:outline-none focus:border-blue-500"
+              required
+            />
+          </div>
+          <div className="mb-6 relative">
+            <LockIcon className="absolute top-3 left-3 text-black " />
+            <input
+              type="password"
+              id="password"
+              value={password}
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-2 pl-10 rounded-full border-2 border-gray-500  text-black  focus:outline-none focus:border-blue-500"
+
+              required
+            />
+          </div>
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+
+          <div className="flex justify-center">
             <button
               type="submit"
-              onClick={handleRegister}
+              onClick={(event) => handleRegister(event)}
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-md transition-all duration-300"
+              className="w-fit bg-green-500 hover:bg-blue-700 text-white font-regular py-1 px-6 rounded-xl transition-all duration-300"
             >
-              {loading ? "Signing Up..." : "Sign Up"}
-            </button>
-          </form>
-          <div className="mt-6 text-center text-sm">
-            <p>Already have an account?</p>
-            <button
-              onClick={() => navigate("/login")}
-              className="mt-2 text-blue-500 hover:text-blue-400 font-medium"
-            >
-              Sign In
+              {loading ? "Signing Up..." : "Create Account"}
             </button>
           </div>
+
+        </form>
+        <div className=" text-center text-sm">
+          <button
+            onClick={() => navigate("/login")}
+            className="mt-2 text-blue-500 hover:text-blue-400 font-medium"
+          >
+            Sign In
+          </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
+
 
 export default Register;
