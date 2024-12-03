@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import Logo from "../assets/image.png";
-import EmailIcon from '@mui/icons-material/Email';
-import LockIcon from '@mui/icons-material/Lock';
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,15 +11,16 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const authContext = useContext(AuthContext);
+  const user = authContext.user;
   const navigate = useNavigate();
-
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
       if (authContext) {
         await authContext.login(email, password);
-        navigate("/");
+        navigate("/")
       }
     } catch (err) {
       setError(err.message);
@@ -32,11 +33,7 @@ const Login = () => {
     <div className="flex h-screen relative">
       <div className="mb-12 absolute">
         <button onClick={() => navigate("/")}>
-          <img
-            src={Logo}
-            alt="Logo"
-            className="w-60 h-32"
-          />
+          <img src={Logo} alt="Logo" className="w-60 h-32" />
         </button>
       </div>
       <div className="flex flex-col w-full justify-center items-center px-8 py-12 bg-white rounded-r-xl">
@@ -63,7 +60,6 @@ const Login = () => {
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 pl-10 rounded-full border-2 border-gray-500  text-black  focus:outline-none focus:border-blue-500"
-
               required
             />
           </div>
@@ -79,7 +75,6 @@ const Login = () => {
               {loading ? "Logging In..." : "Login"}
             </button>
           </div>
-
         </form>
         <div className="mt-8 text-center text-sm">
           <p className="text-black">Don't have an account?</p>
@@ -91,7 +86,7 @@ const Login = () => {
           </button>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

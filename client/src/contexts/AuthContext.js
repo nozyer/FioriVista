@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
     const userDoc = await getDoc(doc(db, "users", userUid));
     if (userDoc.exists()) {
       const profileData = userDoc.data();
-      console.log(profileData);
 
       setUserProfile(profileData);
       localStorage.setItem("userProfile", JSON.stringify(profileData));
