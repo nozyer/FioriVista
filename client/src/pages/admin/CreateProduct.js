@@ -46,7 +46,7 @@ const CreateProduct = () => {
       </div>
       <form
         onSubmit={handleAddProduct}
-        className="flex h-2/5 flex-col w-2/5 gap-6 text-xl items-center border-2"
+        className="flex h-2/5 flex-col w-2/5 gap-6 text-xl items-center"
       >
         <input
           type="productName"
