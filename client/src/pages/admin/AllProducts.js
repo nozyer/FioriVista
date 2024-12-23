@@ -24,7 +24,7 @@ const AllProducts = () => {
     fetchProducts();
   }, []);
   return (
-    <div className="flex h-screen w-full bg-white justify-center rounded-r-xl relative">
+    <div className="flex flex-col h-full w-full bg-white justify-center rounded-r-xl relative mb-10">
       <div className="flex w-full top-0 absolute justify-between items-center">
         <div className="top-0 left-0 ">
           <button onClick={() => navigate("/")}>
@@ -33,8 +33,12 @@ const AllProducts = () => {
         </div>
         <div className="top-0 right-0 p-10">{user ? user.email : ""}</div>
       </div>
-      <div className="p-40">
-        <h6 className="font-bold text-center text-3xl"> All Products</h6>
+      <div className="pt-24 px-20">
+        <span className="font-bold text-center text-3xl text-black flex justify-center">
+          {" "}
+          All Products
+        </span>
+
         {products ? (
           <div className="grid grid-cols-2 gap-10 mt-8 lg:grid-cols-4">
             {products.map((product, key) => (
