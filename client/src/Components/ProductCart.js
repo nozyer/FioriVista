@@ -1,14 +1,19 @@
 import React from "react";
+import product_image from "../assets/cicek.png";
 
 const ProductCart = ({ props }) => {
   return (
-    <div className="flex flex-row w-[340px] h-[170px]">
-      <div className="flex w-2/5 bg-red-400"></div>
-      <div className="flex flex-col w-3/5 bg-blue-400">
-        <span>{props.productName}</span>
-        <span>{props.productPrice}</span>
-        <span>{props.productStock}</span>
-        <span>{props.productDescription}</span>
+    <div className="flex flex-col border-2 rounded-lg  bg-orange-200">
+      <div className="p-2">
+        <img src={product_image} alt="image" />
+      </div>
+
+      <div className="flex flex-col p-2">
+        <span className="font-semibold ">Ürün İsmi: {props.productName}</span>
+        <span className="font-semibold ">
+          Ürün Fiyatı: {props.productPrice}
+        </span>
+        <span className="font-semibold ">Ürün Stoğu: {props.productStock}</span>
       </div>
     </div>
   );
