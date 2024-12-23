@@ -13,14 +13,14 @@ const Login = () => {
   const authContext = useContext(AuthContext);
   const user = authContext.user;
   const navigate = useNavigate();
-  
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
       if (authContext) {
         await authContext.login(email, password);
-        navigate("/")
+        navigate("/");
       }
     } catch (err) {
       setError(err.message);
@@ -70,9 +70,11 @@ const Login = () => {
               type="submit"
               onClick={(event) => handleLogin(event)}
               disabled={loading}
-              className="w-1/4 bg-green-500 hover:bg-blue-700 text-white font-regular py-1 px-6 rounded-xl transition-all duration-300"
+              className="bg-green-500 hover:bg-blue-700 text-white font-regular py-1 px-6 rounded-xl transition-all duration-300"
             >
-              {loading ? "Logging In..." : "Login"}
+              <span className="w-fit">
+                {loading ? "Logging In..." : "Login"}
+              </span>
             </button>
           </div>
         </form>
