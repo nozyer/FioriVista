@@ -27,7 +27,7 @@ const AllProducts = () => {
     <div className="flex flex-col h-full w-full bg-white justify-center rounded-r-xl relative mb-10">
       <div className="flex w-full top-0 absolute justify-between items-center">
         <div className="top-0 left-0 ">
-          <button onClick={() => navigate("/")}>
+          <button onClick={() => navigate("/admindashboard")}>
             <img src={logo} alt="logo" className="w-60 h-32" />
           </button>
         </div>

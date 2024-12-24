@@ -6,27 +6,30 @@ import AdminManagement from "./pages/admin/AdminManagement";
 import CreateProduct from "./pages/admin/CreateProduct";
 import AllProducts from "./pages/admin/AllProducts";
 import ManageUsers from "./pages/admin/ManageUsers";
-
+import "react-toastify/dist/ReactToastify.css";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/admindashboard" element={<AdminManagement />} />
-        <Route path="/admindashboard/create" element={<CreateProduct />} />
-        <Route path="/admindashboard/allProducts" element={<AllProducts />} />
-        <Route path="/admindashboard/manageUsers" element={<ManageUsers />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <ToastContainer />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/admindashboard" element={<AdminManagement />} />
+          <Route path="/admindashboard/create" element={<CreateProduct />} />
+          <Route path="/admindashboard/allProducts" element={<AllProducts />} />
+          <Route path="/admindashboard/manageUsers" element={<ManageUsers />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 

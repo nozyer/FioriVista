@@ -16,7 +16,7 @@ const AdminManagement = () => {
             <img src={logo} alt="logo" className="w-60 h-32" />
           </button>
         </div>
-        <div className="top-0 right-0 p-10">{user.email}</div>
+        <div className="top-0 right-0 p-10">{user?.email}</div>
       </div>
       <span className="flex mb-6 text-4xl font-semibold">Welcome Admin</span>
       <div className="flex h-2/5 flex-col w-1/3 gap-6 text-xl justify-center items-center">
