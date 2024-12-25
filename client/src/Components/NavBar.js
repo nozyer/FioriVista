@@ -5,13 +5,16 @@ import { checkIfUserAdmin } from "../services/api";
 import logo from "../assets/image.png";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
+import { Button, Menu, MenuItem } from "@mui/material";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
   const [role, setRole] = useState(null);
   const [searchKeyWord, setSearchKeyWord] = useState("");
   const user = authContext.user;
+  const userProfile = authContext.userProfile;
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
   const checkUserRole = async () => {
     if (user) {
       const response = await checkIfUserAdmin(user.uid);
@@ -21,7 +24,8 @@ const Navbar = () => {
   useEffect(() => {
     checkUserRole();
   }, []);
-
+  console.log(userProfile);
+  
   return (
     <nav className="flex items-center justify-between h-[150px]">
       <img className="w-60 h-32" src={logo} alt="logo_image"></img>
@@ -36,30 +40,58 @@ const Navbar = () => {
         {user ? (
           <div className="flex flex-row items-center gap-2">
             <span className="font-semibold text-black">{user.email}</span>
-            {role === "admin" ? (
-              <button
-                onClick={() => navigate("/admindashboard")}
-                className="text-black"
-              >
-                Admin Page
-              </button>
-            ) : (
-              ""
-            )}
-            <PersonIcon
+            <Button
+              onClick={(event) => setAnchorEl(event.currentTarget)} // Menüyü aç
+              startIcon={<PersonIcon />}
               sx={{
                 color: "black",
+                textTransform: "none",
               }}
-            />
-            <button
-              className=" text-black"
+            >
+              My Account
+            </Button>
+
+            <>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)} // Menüyü kapat
+              >
+                <MenuItem
+                  onClick={() => {
+                    setAnchorEl(null); // Menüyü kapat
+                    navigate("/profile"); // Profile yönlendir
+                  }}
+                >
+                  My Profile
+                </MenuItem>
+                {userProfile.userRole === "admin" ? (
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorEl(null); // Menüyü kapat
+                      navigate("/admindashboard"); // Admin Dashboard yönlendir
+                    }}
+                  >
+                    Admin Page
+                  </MenuItem>
+                ) : (
+                  ""
+                )}
+              </Menu>
+            </>
+
+            <Button
               onClick={() => {
                 authContext?.logout();
                 navigate("/login");
               }}
+              sx={{
+                color: "black",
+                textTransform: "none",
+              }}
             >
               Logout
-            </button>
+            </Button>
           </div>
         ) : (
           <>

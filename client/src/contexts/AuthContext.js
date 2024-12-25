@@ -59,6 +59,7 @@ export const AuthProvider = ({ children }) => {
         userRole: "user",
         userUid: result.user.uid,
         userEmail: result.user.email || "",
+        userAddress: null
       };
       await setDoc(doc(db, "users", result.user.uid), newUserProfile);
       setUser(result.user);

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import uuid4 from "uuid4";
 import { addProduct } from "../../services/api";
+import { toast } from "react-toastify";
 
 const CreateProduct = () => {
   const [productName, setProductName] = useState("");
@@ -14,10 +15,9 @@ const CreateProduct = () => {
 
   const authContext = useContext(AuthContext);
   const user = authContext.user;
-  console.log(user);
 
-  const handleAddProduct = async () => {
-    console.log("asdasdasd");
+  const handleAddProduct = async (e) => {
+    e.preventDefault();
     const productId = uuid4();
     const product = {
       productId,
@@ -26,9 +26,14 @@ const CreateProduct = () => {
       productStock,
       productDescription,
     };
-    console.log(product);
     try {
-      await addProduct(product);
+      const response = await addProduct(product);
+      toast.success(response);
+
+      setProductDescription("");
+      setProductName("");
+      setProductPrice("");
+      setProductStock("");
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +94,10 @@ const CreateProduct = () => {
             className="w-full pl-2  rounded-full border-2 border-gray-500  text-black"
             required
           />
-          <button className="bg-blue-600 rounded-full text-white p-2">
+          <button
+            className="bg-blue-600 rounded-full text-white p-2"
+            type="submit"
+          >
             Submit
           </button>
         </form>

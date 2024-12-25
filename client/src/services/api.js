@@ -23,6 +23,7 @@ export const addProduct = async (product) => {
       `${API_BASE_URL}/product/addProduct`,
       product
     );
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -69,6 +70,49 @@ export const deleteUser = async (userId) => {
     return response;
   } catch (error) {
     console.error("Error deleting roles:", error);
+    throw error;
+  }
+};
+
+export const addAdress = async (userId, newAddress) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/user/changeUserRole/${userId}`,
+      { newAddress }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error adding address:", error);
+    throw error;
+  }
+};
+export const fetchUserData = async (userId) => {
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}/user/fetchUserData/${userId}`
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+export const updateUserDetails = async (
+  userId,
+  userEmail,
+  username,
+  userAddress
+) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/user/updateUserDetails/${userId}`,
+      { userEmail, username, userAddress }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
     throw error;
   }
 };
