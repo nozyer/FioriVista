@@ -6,7 +6,6 @@ const db = firebase.collection("users");
 
 const checkIfUserAdmin = async (req, res, next) => {
   const { userId } = req.params;
-
   try {
     // Firestore'dan kullanıcı rolünü almak
     const userDocRef = db.doc(userId.trim());
@@ -39,6 +38,7 @@ const getAllUsers = async (req, res, next) => {
     res.status(500).json({ error: "Failed to fetch users" });
   }
 };
+
 const changeUserRole = async (req, res, next) => {
   const { userId } = req.params;
   const { newRole } = req.body;
@@ -67,7 +67,9 @@ const deleteUser = async (req, res, next) => {
 
     const userData = userDoc.data();
     if (userData.userRole === "admin") {
-      return res.status(400).json({ message: "Admin users cannot be deleted." });
+      return res
+        .status(400)
+        .json({ message: "Admin users cannot be deleted." });
     }
 
     await userDocRef.delete();
@@ -79,10 +81,76 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+const addAdress = async (req, res, next) => {
+  const { userId } = req.params;
+  const { newAddress } = req.body;
+
+  try {
+    const userDocRef = db.doc(userId.trim());
+    await userDocRef.update({
+      userAddress: newAddress,
+    });
+    res.status(200).json(`User address successfully changed to ${newAddress}`);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to change userAddress" });
+  }
+};
+
+const fetchUserData = async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    const userDocRef = db.doc(userId.trim());
+    const userDoc = await userDocRef.get();
+
+    if (userDoc.exists) {
+      const userData = userDoc.data();
+
+      req.userData = userData;
+      return res.status(200).json({ userData: userData });
+    } else {
+      return res.status(404).json({ message: "Kullanıcı bulunamadı." });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "Sunucu hatası.", error });
+  }
+};
+
+const updateUserDetails = async (req, res, next) => {
+  const { userId } = req.params;
+  const { username, userEmail, userAddress } = req.body;
+  console.log(userId,userEmail,username,userAddress);
+  
+  try {
+    const userDocRef = db.doc(userId.trim());
+    const userDoc = await userDocRef.get();
+    if (!userDoc.exists) {
+      return res.status(404).json({ message: "Kullanıcı bulunamadı." });
+    }
+
+    await userDocRef.update({
+      username: username,
+      userEmail: userEmail,
+      userAddress: userAddress,
+    });
+
+    return res.status(200).json({
+      message: "Kullanıcı bilgileri başarıyla güncellendi.",
+      updatedFields: { username, userEmail, userAddress },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Kullanıcı bilgileri güncellenirken bir hata oluştu.",
+      error,
+    });
+  }
+};
 
 module.exports = {
   checkIfUserAdmin,
   getAllUsers,
   changeUserRole,
-  deleteUser
+  deleteUser,
+  addAdress,
+  fetchUserData,
+  updateUserDetails
 };
