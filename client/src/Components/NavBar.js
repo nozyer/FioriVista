@@ -97,6 +97,14 @@ const Navbar = () => {
                 >
                   My Profile
                 </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    setAnchorEl(null);
+                    navigate("/orders");
+                  }}
+                >
+                  My Orders
+                </MenuItem>
                 {userProfile ? (
                   <div>
                     {userProfile.userRole === "admin" ? (

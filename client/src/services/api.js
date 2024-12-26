@@ -98,15 +98,11 @@ export const fetchUserData = async (userId) => {
     throw error;
   }
 };
-export const updateUserDetails = async (
-  userId,
-  username,
-  userAddress
-) => {
+export const updateUserDetails = async (userId, username, userAddress) => {
   try {
     const response = await axios.post(
       `${API_BASE_URL}/user/updateUserDetails/${userId}`,
-      {  username, userAddress }
+      { username, userAddress }
     );
 
     return response.data;
@@ -114,4 +110,42 @@ export const updateUserDetails = async (
     console.error("Error fetching user data:", error);
     throw error;
   }
+};
+
+export const orderAPI = {
+  createOrder: async (orderData) => {
+
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/orders/create`,
+        orderData
+      );
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  },
+
+  getUserOrders: async (userId) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/orders/user/${userId}`);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  },
+};
+
+export const checkoutAPI = {
+  processPayment: async (paymentData) => {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/payment/process`,
+        paymentData
+      );
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  },
 };

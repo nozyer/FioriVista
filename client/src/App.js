@@ -14,6 +14,8 @@ import Profile from "./pages/Profile";
 import CartPage from "./pages/CartPage";
 import CheckOut from "./pages/checkout/CheckOut";
 import ProductDetail from "./pages/product/ProductDetail";
+import PaymentSuccessful from "./pages/checkout/payment-successfull";
+import OrderPage from "./pages/orders/OrderPage";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./routes/protectedRoute";
@@ -62,6 +64,11 @@ function App() {
               element={<ProductDetail />}
             />
             <Route path="/checkout" element={<CheckOut />} />
+            <Route
+              path="/payment-successfull"
+              element={<PaymentSuccessful />}
+            />
+            <Route path="/orders" element={<OrderPage />} />
           </Routes>
         </Router>
       </AuthProvider>
