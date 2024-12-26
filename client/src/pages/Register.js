@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/image.png";
-import EmailIcon from '@mui/icons-material/Email';
-import LockIcon from '@mui/icons-material/Lock';
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -28,19 +28,13 @@ const Register = () => {
   };
 
   return (
-    <div className="flex h-screen relative">
-      <div className="mb-12 absolute">
-        <button onClick={() => navigate("/")}>                
-          <img
-            src={Logo}
-            alt="Logo"
-            className="w-60 h-32"
-          />
-        </button>
-      </div>
+    <div className="flex relative">
       <div className="flex flex-col w-full justify-center items-center px-8 py-12 bg-white rounded-r-xl">
         <h2 className="text-3xl font-semibold mb-8 text-black">Register</h2>
-        <form onSubmit={handleRegister} className="w-3/4 max-w-md flex flex-col">
+        <form
+          onSubmit={handleRegister}
+          className="w-3/4 max-w-md flex flex-col"
+        >
           <div className="mb-2 relative">
             <EmailIcon className="absolute top-3 left-3 text-black " />
             <input
@@ -62,7 +56,6 @@ const Register = () => {
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 pl-10 rounded-full border-2 border-gray-500  text-black  focus:outline-none focus:border-blue-500"
-
               required
             />
           </div>
@@ -78,7 +71,6 @@ const Register = () => {
               {loading ? "Signing Up..." : "Create Account"}
             </button>
           </div>
-
         </form>
         <div className=" text-center text-sm">
           <button
@@ -89,9 +81,8 @@ const Register = () => {
           </button>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
-
 
 export default Register;

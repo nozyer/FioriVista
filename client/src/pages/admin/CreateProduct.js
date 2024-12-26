@@ -40,16 +40,8 @@ const CreateProduct = () => {
   };
 
   return (
-    <div className="flex h-full flex-col w-full justify-center items-center bg-white rounded-r-xl relative">
-      <div className="flex w-full top-0 justify-between items-center absolute">
-        <div className="top-0 left-0">
-          <button onClick={() => navigate("/admindashboard")}>
-            <img src={logo} alt="logo" className="w-60 h-32" />
-          </button>
-        </div>
-        <div className="top-0 right-0 p-10">{user ? user.email : ""}</div>
-      </div>
-      <div className="flex flex-col pt-24 mx-24 w-2/5 justify-center gap-10">
+    <div className="flex flex-col w-full justify-center items-center bg-white rounded-r-xl relative">
+      <div className="flex flex-col mx-24 w-2/5 justify-center gap-10">
         <span className="font-bold text-center text-3xl text-black flex justify-center">
           {" "}
           Create Product

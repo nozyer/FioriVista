@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import ProductCart from "../Components/ProductCart";
 import Loading from "./Loading";
 import { checkIfUserAdmin, getAllProducts } from "../services/api";
-import NavBar from "../Components/NavBar";
 
 function Home() {
   const [products, setProducts] = useState();
@@ -20,7 +19,6 @@ function Home() {
   }, []);
   return (
     <div className="h-full mx-24 pb-10">
-      <NavBar />
       <div>
         {products ? (
           <div className="grid grid-cols-2 gap-10 mt-8 lg:grid-cols-4">

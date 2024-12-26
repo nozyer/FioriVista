@@ -21,7 +21,7 @@ const ManageUsers = () => {
     "User Id",
     "User Name",
     "Change Role",
-    "Actions"
+    "Actions",
   ];
   const fetchUsers = async () => {
     try {
@@ -37,14 +37,14 @@ const ManageUsers = () => {
     }
   };
 
-  const handleDeleteUser = async(tableUser) => {
+  const handleDeleteUser = async (tableUser) => {
     try {
-      const response = await deleteUser(tableUser.userUid)
-      toast.success("User deleted succesfully")
+      const response = await deleteUser(tableUser.userUid);
+      toast.success("User deleted succesfully");
     } catch (error) {
-      toast.error(error)
+      toast.error(error);
     }
-  }
+  };
 
   const handleChange = async (tableUser) => {
     if (tableUser.userRole === "admin") {
@@ -69,17 +69,7 @@ const ManageUsers = () => {
   }, []);
   return (
     <div className="flex flex-col h-full bg-white justify-center rounded-r-xl mb-10 relative">
-      <div className="flex w-full top-0 absolute justify-between items-center">
-        <div className="top-0 left-0 ">
-          <button onClick={() => navigate("/admindashboard")}>
-            <img src={logo} alt="logo" className="w-60 h-32" />
-          </button>
-        </div>
-        <div className="top-0 right-0 p-10">
-          {currentUser ? currentUser.email : ""}
-        </div>
-      </div>
-      <div className="flex flex-col pt-24 mx-24 gap-10">
+      <div className="flex flex-col  mx-24 gap-10">
         <span className="font-bold text-center text-3xl text-black flex justify-center">
           {" "}
           Manage Users
@@ -132,9 +122,12 @@ const ManageUsers = () => {
                     )}
                   </td>
                   <td className="px-4 py-2 border-b text-center">
-                    <button onClick={() => {
-                      handleDeleteUser(tableUser)
-                    }} className="  border bg-red-500 text-white font-semibold rounded-lg px-3">
+                    <button
+                      onClick={() => {
+                        handleDeleteUser(tableUser);
+                      }}
+                      className="  border bg-red-500 text-white font-semibold rounded-lg px-3"
+                    >
                       Delete
                     </button>
                   </td>

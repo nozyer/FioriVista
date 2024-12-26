@@ -19,7 +19,6 @@ const UpdateProfile = ({ username, userEmail, userAddress, userUid }) => {
     try {
       const response = await updateUserDetails(
         userUid,
-        userEmailState,
         userName,
         userAddressState
       );
@@ -35,10 +34,8 @@ const UpdateProfile = ({ username, userEmail, userAddress, userUid }) => {
       if (docSnapshot.exists()) {
         setUserData(docSnapshot.data());
         setUserName(docSnapshot.data().username);
-        setUserEmail(docSnapshot.data().userEmail);
         setUserAddress(docSnapshot.data().userAddress);
-        toast.success("Succesfully changed")
-        
+        toast.success("Succesfully changed");
       } else {
         console.log("User document not found!");
       }
@@ -48,22 +45,14 @@ const UpdateProfile = ({ username, userEmail, userAddress, userUid }) => {
   }, [userUid]);
 
   return (
-    <div className="flex h-full flex-col w-full justify-center items-center bg-white rounded-r-xl relative">
-      <div className="flex w-full top-0 justify-between items-center absolute">
-        <button onClick={() => navigate("/")}>
-          <img src={logo} alt="logo" className="w-60 h-32" />
-        </button>
-        <div className="top-0 right-0 p-10">
-          {userUid ? userEmailState : ""}
-        </div>
-      </div>
-      <div className="flex flex-col pt-24 gap-10">
+    <div className="flex flex-col w-full justify-center items-center bg-white rounded-r-xl">
+      <div className="flex flex-col  gap-10">
         <span className="font-bold text-center text-3xl text-black flex justify-center mt-16">
           Update Profile
         </span>
         <form
           onSubmit={handleUpdateUser}
-          className="flex flex-col gap-6 text-xl items-center mt-36 w-[400px]"
+          className="flex flex-col gap-6 text-xl items-center  w-[400px]"
         >
           <input
             className=" border-2 rounded-2xl pl-2 border-black w-full"
@@ -72,15 +61,6 @@ const UpdateProfile = ({ username, userEmail, userAddress, userUid }) => {
             value={userName}
             placeholder="User Name"
             onChange={(e) => setUserName(e.target.value)}
-            required
-          />
-          <input
-            className=" border-2 rounded-2xl pl-2 border-black w-full"
-            type="email"
-            id="userEmail"
-            value={userEmailState}
-            placeholder="User Email"
-            onChange={(e) => setUserEmail(e.target.value)}
             required
           />
           <input

@@ -30,13 +30,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen relative">
-      <div className="mb-12 absolute">
-        <button onClick={() => navigate("/")}>
-          <img src={Logo} alt="Logo" className="w-60 h-32" />
-        </button>
-      </div>
-      <div className="flex flex-col w-full justify-center items-center px-8 py-12 bg-white rounded-r-xl">
+    <div className="flex ">
+      <div className="flex flex-col w-full px-8 py-12  justify-center items-center bg-white rounded-r-xl">
         <h2 className="text-3xl font-semibold mb-8 text-black">Login</h2>
         <form onSubmit={handleLogin} className="w-3/4 max-w-md flex flex-col">
           <div className="mb-2 relative">
