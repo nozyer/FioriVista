@@ -100,14 +100,13 @@ export const fetchUserData = async (userId) => {
 };
 export const updateUserDetails = async (
   userId,
-  userEmail,
   username,
   userAddress
 ) => {
   try {
     const response = await axios.post(
       `${API_BASE_URL}/user/updateUserDetails/${userId}`,
-      { userEmail, username, userAddress }
+      {  username, userAddress }
     );
 
     return response.data;

@@ -117,9 +117,9 @@ const fetchUserData = async (req, res, next) => {
 
 const updateUserDetails = async (req, res, next) => {
   const { userId } = req.params;
-  const { username, userEmail, userAddress } = req.body;
-  console.log(userId,userEmail,username,userAddress);
-  
+  const { username, userAddress } = req.body;
+  console.log(userId, username, userAddress);
+
   try {
     const userDocRef = db.doc(userId.trim());
     const userDoc = await userDocRef.get();
@@ -129,13 +129,12 @@ const updateUserDetails = async (req, res, next) => {
 
     await userDocRef.update({
       username: username,
-      userEmail: userEmail,
       userAddress: userAddress,
     });
 
     return res.status(200).json({
       message: "Kullanıcı bilgileri başarıyla güncellendi.",
-      updatedFields: { username, userEmail, userAddress },
+      updatedFields: { username, userAddress },
     });
   } catch (error) {
     return res.status(500).json({
@@ -152,5 +151,5 @@ module.exports = {
   deleteUser,
   addAdress,
   fetchUserData,
-  updateUserDetails
+  updateUserDetails,
 };
